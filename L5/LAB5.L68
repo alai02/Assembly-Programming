@@ -1,0 +1,36 @@
+00008000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.15.02
+Created On: 10/25/2016 7:09:54 PM
+
+00000000                             1  
+00000000                             2  
+00000000                             3  
+00000000                             4  
+00008000                             5      ORG    $8000
+00008000                             6  START:               
+00008000  1039 00009000              7          MOVE.B  HEXVAL,D0
+00008006  0600 0030                  8          ADD.B   #$30,D0
+0000800A  B07C 0039                  9          CMP     #$39,D0
+0000800E  6F00 0004                 10          BLE     EXIT
+00008012  5E00                      11          ADD.B   #$7,D0
+00008014  13C0 00009001             12  EXIT    MOVE.B  D0,CONS
+0000801A  4E4E                      13      TRAP    #14
+0000801C                            14      
+0000801C  FFFF FFFF                 15      SIMHALT     
+00008020                            16  
+00009000                            17      ORG $9000
+00009000= 0A                        18  HEXVAL  DC.B    $A
+00009001                            19  CONS    DS.B   1
+00009002                            20      END    START     
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+CONS                9001
+EXIT                8014
+HEXVAL              9000
+START               8000

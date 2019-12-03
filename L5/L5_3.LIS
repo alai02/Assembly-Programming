@@ -1,0 +1,42 @@
+
+Source file: L5_3.X68
+Assembled on: 16-10-25 at: 20:17:14
+          by: X68K PC-2.2 Copyright (c) University of Teesside 1989,96
+Defaults: ORG $0/FORMAT/OPT A,BRL,CEX,CL,FRL,MC,MD,NOMEX,NOPCO
+
+    1  00008000                        ORG       $8000
+    2  00008000              START:              
+    3  00008000 103900009000           MOVE.B    NUM1,D0
+    4  00008006 123900009001           MOVE.B    NUM2,D1
+    5  0000800C 143900009002           MOVE.B    NUM3,D2
+    6  00008012 163900009003           MOVE.B    BIGGEST,D3
+    7  00008018              IF:                 
+    8  00008018 B041                   CMP       D1,D0
+    9  0000801A 6D000018               BLT       FIRST_EL
+   10  0000801E              INSIDE_IF:           
+   11  0000801E B042                   CMP       D2,D0
+   12  00008020 6D00000A               BLT       INSIDE_EL
+   13  00008024 163900009000           MOVE.B    NUM1,D3
+   14  0000802A 4E4E                   TRAP      #14
+   15  0000802C              INSIDE_EL:           
+   16  0000802C 163900009002           MOVE.B    NUM3,D3
+   17  00008032 4E4E                   TRAP      #14
+   18  00008034              FIRST_EL:           
+   19  00008034 B242                   CMP       D2,D1
+   20  00008036 6D00000A               BLT       SECOND_EL
+   21  0000803A 163900009001           MOVE.B    NUM2,D3
+   22  00008040 4E4E                   TRAP      #14
+   23  00008042              SECOND_EL:           
+   24  00008042 163900009002           MOVE.B    NUM3,D3
+   25  00008048 13C300009003           MOVE.B    D3,BIGGEST
+   26  0000804E 4E4E                   TRAP      #14
+   27                            
+   28  00009000                        ORG       $9000
+   29  00009000 FE           NUM1:     DC.B      -2
+   30  00009001 F6           NUM2:     DC.B      -10
+   31  00009002 F1           NUM3:     DC.B      -15
+   32  00009003 00000001     BIGGEST:  DS.B      1
+   33                        
+   34           00008000               END       START
+
+Lines: 34, Errors: 0, Warnings: 0.

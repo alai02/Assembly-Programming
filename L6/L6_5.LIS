@@ -1,0 +1,42 @@
+
+Source file: L6_5.X68
+Assembled on: 16-11-01 at: 19:39:10
+          by: X68K PC-2.2 Copyright (c) University of Teesside 1989,96
+Defaults: ORG $0/FORMAT/OPT A,BRL,CEX,CL,FRL,MC,MD,NOMEX,NOPCO
+
+    1  00008000                        ORG       $8000
+    2  00008000 41F900009000 START:    LEA       MATRIX,A0
+    3  00008006 4240                   CLR       D0
+    4  00008008 4241                   CLR       D1
+    5  0000800A 4242                   CLR       D2
+    6  0000800C 1200         LOOP1:    MOVE.B    D0,D1
+    7  0000800E 5240                   ADDQ      #1,D0
+    8  00008010 1400         LOOP2:    MOVE.B    D0,D2
+    9  00008012 C4FC0004               MULU      #4,D2
+   10  00008016 D401                   ADD.B     D1,D2
+   11  00008018 18302000               MOVE.B    (A0,D2),D4
+   12  0000801C 1602                   MOVE.B    D2,D3
+   13  0000801E C6FC0004               MULU      #4,D3
+   14  00008022 11B030002000           MOVE.B    (A0,D3),(A0,D2)
+   15  00008028 11843000               MOVE.B    D4,(A0,D3)
+   16  0000802C 5241         LC2:      ADDQ      #1,D1
+   17  0000802E 0C410003               CMPI      #3,D1
+   18  00008032 6E000004               BGT       LC1
+   19  00008036 60D8                   BRA       LOOP2
+   20  00008038 5240         LC1:      ADDQ      #1,D0
+   21  0000803A 0C400002               CMPI      #2,D0
+   22  0000803E 6E000004               BGT       EXIT
+   23  00008042 60C8                   BRA       LOOP1
+   24  00008044 263900009000 EXIT:     MOVE.L    $9000,D3
+   25  0000804A 243900009004           MOVE.L    $9004,D2
+   26  00008050 223900009008           MOVE.L    $9008,D1
+   27  00008056 20390000900C           MOVE.L    $900C,D0
+   28  0000805C 4E4E                   TRAP      #14
+   29  00009000                        ORG       $9000
+   30  00009000 01020304     MATRIX:   DC.B      1,2,3,4
+   31  00009004 05060708               DC.B      5,6,7,8
+   32  00009008 090A0B0C               DC.B      9,10,11,12
+   33  0000900C 0D0E0F10               DC.B      13,14,15,16
+   34           00008000               END       START
+
+Lines: 34, Errors: 0, Warnings: 0.

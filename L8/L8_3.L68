@@ -1,0 +1,58 @@
+00008000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.15.02
+Created On: 11/15/2016 7:22:44 PM
+
+00008000                             1      ORG $8000
+00008000                             2  START
+00008000  4879 00009000              3      PEA W
+00008006  4879 00009002              4      PEA X
+0000800C  4879 00009004              5      PEA Y
+00008012  4879 00009002              6      PEA X
+00008018  4EB9 00008024              7      JSR SOLVE
+0000801E  4FEF 0010                  8      LEA 16(SP),SP
+00008022  4E4E                       9      TRAP #14
+00008024                            10  SOLVE 
+00008024  48A7 0080                 11      MOVEM.W A0,-(SP)
+00008028  206F 0010                 12      MOVEA.L 16(SP),A0
+0000802C  48A7 E000                 13      MOVEM.W D0-D2,-(SP)
+00008030  303C 0005                 14      MOVE.W #5,D0
+00008034  C0E8 0002                 15      MULU 2(A0),D0
+00008038  C0E8 0002                 16      MULU 2(A0),D0
+0000803C                            17      
+0000803C  323C 0004                 18      MOVE.W #4,D1
+00008040  C2E8 0002                 19      MULU 2(A0),D1
+00008044  C2E8 0004                 20      MULU 4(A0),D1
+00008048                            21      
+00008048  3428 0006                 22      MOVE.W 6(A0),D2
+0000804C  C4E8 0006                 23      MULU 6(A0),D2
+00008050                            24      
+00008050  D242                      25      ADD D2,D1
+00008052  9240                      26      SUB D0,D1
+00008054                            27      
+00008054  3080                      28      MOVE.W D0,(A0)
+00008056  4C9F 0007                 29      MOVEM.W (SP)+,D0-D2
+0000805A  4C9F 0100                 30      MOVEM.W (SP)+,A0
+0000805E  2441                      31      MOVE.L D1,A2
+00008060  4E75                      32      RTS
+00008062                            33      
+00009000                            34      ORG $9000
+00009000= 0001                      35  W DC.W 1
+00009002= 0002                      36  X DC.W 2
+00009004= 0003                      37  Y DC.W 3
+00009006= 0004                      38  Z DC.W 4
+00009008                            39  
+00009008                            40      END START
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+SOLVE               8024
+START               8000
+W                   9000
+X                   9002
+Y                   9004
+Z                   9006

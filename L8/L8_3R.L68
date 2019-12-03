@@ -1,0 +1,70 @@
+00008000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.15.02
+Created On: 11/15/2016 8:15:10 PM
+
+00008000                             1      ORG $8000
+00008000  203C 11111111              2  START   MOVE.L #$11111111,D0
+00008006  223C 22222222              3          MOVE.L #$22222222,D1
+0000800C  243C 33333333              4          MOVE.L #$33333333,D2
+00008012  4879 00009000              5          PEA X
+00008018  4879 00009002              6          PEA Y
+0000801E  4879 00009004              7          PEA Z
+00008024  4879 00009006              8          PEA W
+0000802A  4EB9 00008036              9          JSR SOLVE
+00008030  4FEF 003C                 10          LEA 60(SP),SP
+00008034  4E4E                      11          TRAP #14
+00008036  48E7 A000                 12  SOLVE   MOVEM.L D0/D2,-(SP)
+0000803A  48E7 00F0                 13          MOVEM.L A0-A3,-(SP)
+0000803E  4280                      14          CLR.L D0
+00008040  4281                      15          CLR.L D1
+00008042  4282                      16          CLR.L D2
+00008044                            17          
+00008044  206F 0020                 18          MOVEA.L 32(SP),A0
+00008048  226F 0024                 19          MOVEA.L 36(SP),A1
+0000804C  246F 0028                 20          MOVEA.L 40(SP),A2
+00008050  3010                      21          MOVE.W (A0),D0
+00008052  3211                      22          MOVE.W (A1),D1
+00008054  3412                      23          MOVE.W (A2),D2
+00008056                            24          
+00008056  C3C2                      25          MULS D2,D1
+00008058  C3FC 0004                 26          MULS #4,D1
+0000805C                            27          
+0000805C  C1C0                      28          MULS D0,D0
+0000805E  C5C2                      29          MULS D2,D2
+00008060                            30          
+00008060  C5FC 0005                 31          MULS #5,D2
+00008064  D480                      32          ADD.L D0,D2
+00008066  9481                      33          SUB.L D1,D2
+00008068  2202                      34          MOVE.L D2,D1
+0000806A                            35          
+0000806A  226F 001C                 36          MOVEA.L 28(SP),A1
+0000806E  2281                      37          MOVE.L D1,(A1)
+00008070                            38          
+00008070  205F                      39          MOVEA.L (SP)+,A0
+00008072  225F                      40          MOVEA.L (SP)+,A1
+00008074  245F                      41          MOVEA.L (SP)+,A2
+00008076  265F                      42          MOVEA.L (SP)+,A3
+00008078  4CDF 0005                 43          MOVEM.L (SP)+,D0/D2
+0000807C                            44          
+0000807C  4E75                      45          RTS
+0000807E                            46          
+00009000                            47          ORG $9000
+00009000= 0003                      48  X   DC.W    $3
+00009002= 0004                      49  Y   DC.W    $4
+00009004= 0005                      50  Z   DC.W    $5
+00009006                            51  W   DS.L    1
+0000900A                            52      END START        
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+SOLVE               8036
+START               8000
+W                   9006
+X                   9000
+Y                   9002
+Z                   9004

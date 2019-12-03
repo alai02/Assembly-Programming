@@ -1,0 +1,40 @@
+
+Source file: L8_3NEW.X68
+Assembled on: 16-11-15 at: 18:58:32
+          by: X68K PC-2.2 Copyright (c) University of Teesside 1989,96
+Defaults: ORG $0/FORMAT/OPT A,BRL,CEX,CL,FRL,MC,MD,NOMEX,NOPCO
+
+    1  00008000                        ORG       $8000
+    2  00008000 487900009000 START:    PEA       W                     ;;push vars onto the stack
+    3  00008006 487900009002           PEA       X
+    4  0000800C 487900009004           PEA       Y
+    5  00008012 487900009006           PEA       Z
+    6  00008018 4EB900008020           JSR       SOLVE                 ;;jump to subroutine
+    7  0000801E 4E4E                   TRAP      #14                   ;;end program
+    8  00008020 48A70080     SOLVE:    MOVEM.W   A0,-(SP)              ;; move the values onto the stack
+    9  00008024 206F0010               MOVEA.L   16(SP),A0
+   10  00008028 48A7E000               MOVEM.W   D0-D2,-(SP)
+   11  0000802C 303C0005               MOVE.W    #5,D0
+   12  00008030 C1E80002               MULS      2(A0),D0
+   13  00008034 C1E80002               MULS      2(A0),D0
+   14  00008038 323C0004               MOVE.W    #4,D1
+   15  0000803C C3E80002               MULS      2(A0),D1
+   16  00008040 C3E80004               MULS      4(A0),D1
+   17  00008044 34280006               MOVE.W    6(A0),D2
+   18  00008048 C5E80006               MULS      6(A0),D2
+   19  0000804C 3800                   MOVE.W    D0,D4
+   20  0000804E D842                   ADD.W     D2,D4
+   21  00008050 9841                   SUB.W     D1,D4
+   22  00008052 3084                   MOVE.W    D4,(A0)
+   23  00008054 48B900100000           MOVEM.W   D4,$9000
+                9000        
+   24  0000805C 4E75                   RTS       
+   25                        
+   26  00009000                        ORG       $9000
+   27  00009000 0001         W:        DC.W      1
+   28  00009002 0002         X:        DC.W      2
+   29  00009004 0003         Y:        DC.W      3
+   30  00009006 0004         Z:        DC.W      4
+   31           00008000               END       START
+
+Lines: 31, Errors: 0, Warnings: 0.

@@ -1,0 +1,56 @@
+00008000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.15.02
+Created On: 10/25/2016 8:20:34 PM
+
+00008000                             1      ORG    $8000
+00008000                             2  START:               
+00008000  1039 00009000              3          MOVE.B  NUM1,D0
+00008006  1239 00009001              4          MOVE.B  NUM2,D1
+0000800C  1439 00009002              5          MOVE.B  NUM3,D2
+00008012  1639 00009003              6          MOVE.B  BIGGEST,D3        
+00008018                             7  IF
+00008018  B041                       8      CMP D1,D0
+0000801A  6D00 0018                  9      BLT FIRST_EL
+0000801E                            10  INSIDE_IF
+0000801E  B042                      11      CMP     D2,D0
+00008020  6D00 000A                 12      BLT     INSIDE_EL
+00008024  1639 00009000             13      MOVE.B  NUM1,D3
+0000802A  4E4E                      14      TRAP    #14
+0000802C                            15  INSIDE_EL
+0000802C  1639 00009002             16      MOVE.B  NUM3,D3
+00008032  4E4E                      17      TRAP    #14
+00008034                            18  FIRST_EL
+00008034  B242                      19      CMP D2,D1
+00008036  6D00 000A                 20      BLT SECOND_EL
+0000803A  1639 00009001             21      MOVE.B  NUM2,D3
+00008040  4E4E                      22      TRAP    #14
+00008042                            23  SECOND_EL
+00008042  1639 00009002             24      MOVE.B  NUM3,D3
+00008048  13C3 00009003             25      MOVE.B  D3,BIGGEST
+0000804E  4E4E                      26      TRAP    #14
+00008050                            27      
+00009000                            28      ORG $9000
+00009000= FE                        29  NUM1    DC.B    -2
+00009001= FE                        30  NUM2    DC.B    -2
+00009002= 04                        31  NUM3    DC.B    4
+00009003                            32  BIGGEST DS.B    1
+00009004                            33  
+00009004                            34      END START  
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+BIGGEST             9003
+FIRST_EL            8034
+IF                  8018
+INSIDE_EL           802C
+INSIDE_IF           801E
+NUM1                9000
+NUM2                9001
+NUM3                9002
+SECOND_EL           8042
+START               8000

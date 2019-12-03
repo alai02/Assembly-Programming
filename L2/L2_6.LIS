@@ -1,0 +1,24 @@
+
+Source file: L2_6.X68
+Assembled on: 16-09-27 at: 19:47:26
+          by: X68K PC-2.2 Copyright (c) University of Teesside 1989,96
+Defaults: ORG $0/FORMAT/OPT A,BRL,CEX,CL,FRL,MC,MD,NOMEX,NOPCO
+
+    1                        *template
+    2                        
+    3                        
+    4  00008000                        ORG       $8000
+    5                        
+    6  00008000 4280         PROGRAM:  CLR.L     D0
+    7  00008002 303C000A               MOVE.W    #10,D0
+    8  00008006 323C0005               MOVE.W    #5,D1
+    9  0000800A 343C0009               MOVE.W    #9,D2
+   10  0000800E 363C0020               MOVE.W    #32,D3
+   11  00008012 C1C2                   MULS      D2,D0
+   12  00008014 81C1                   DIVS.W    D1,D0
+   13  00008016 D003                   ADD.B     D3,D0
+   14  00008018 4E4E                   TRAP      #14
+   15                         
+   16           00008000               END       $8000
+
+Lines: 16, Errors: 0, Warnings: 0.
